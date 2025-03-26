@@ -1,0 +1,23 @@
+<ul>
+  @for (node of nodes(); track trackByFn) {
+    <li>
+      <div
+        [class.deleted]="node.is_deleted"
+        (click)="toggleNode(node)"
+        style="cursor: pointer; display: flex; align-items: center;"
+      >
+        @if (node.children && node.children.length > 0) {
+          <span>
+        {{ node['isExpanded'] ? '▲' : '▼' }}
+        </span>
+        }
+        <span>{{ node.id }} - {{ node.title }}</span>
+      </div>
+      @if (node['isExpanded']) {
+        <ul>
+          <app-tree [nodes]="node.children"></app-tree>
+        </ul>
+      }
+    </li>
+  }
+</ul>
